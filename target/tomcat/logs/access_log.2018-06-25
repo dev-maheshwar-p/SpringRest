@@ -1,2 +1,0 @@
-0:0:0:0:0:0:0:1 - - [25/Jun/2018:00:25:02 +0530] "GET /springrest/customers HTTP/1.1" 200 399 http-bio-8080-exec-1 2
-0:0:0:0:0:0:0:1 - - [25/Jun/2018:00:25:03 +0530] "GET /springrest/customers HTTP/1.1" 200 399 http-bio-8080-exec-1 2

@@ -1,5 +1,0 @@
-net/spring/controller/CustomerRestController.class
-net/spring/model/Customer.class
-net/spring/config/AppInitializer.class
-net/spring/config/AppConfig.class
-net/spring/dao/CustomerDAO.class
