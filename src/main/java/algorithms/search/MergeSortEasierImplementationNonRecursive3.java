@@ -1,7 +1,10 @@
 package algorithms.search;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 @SuppressWarnings("Duplicates")
-public class MergeSortEasierImplementationNonRecursive {
+public class MergeSortEasierImplementationNonRecursive3 {
 
     // Print Array
     public static void printArray(int[] array){
@@ -20,15 +23,15 @@ public class MergeSortEasierImplementationNonRecursive {
             return;
         }
         // The size of the sub-arrays . Constantly changing .
-        int step = 1;
+//        int step = 1;
         // startL - start index for left sub-array
         // startR - start index for the right sub-array
-        int startL, startR;
+//        int startL, startR;
 
-        while(step < array.length) {
+        for(int step =1; step < array.length; step *=2){
 
-            startL = 0;
-            startR = step;
+            int startL = 0;
+            int startR = step;
 
             System.out.printf("- - - with step = %d ", step);
             System.out.println();
@@ -55,48 +58,56 @@ public class MergeSortEasierImplementationNonRecursive {
                 System.out.println();
 
             }
-
-            step *= 2;
-
         }
+
     }
 
     // Merge to already sorted blocks
     public static void mergeArrays(int[] array, int startL, int stopL,
                                    int startR, int stopR) {
         // Additional arrays needed for merging
-        int[] right = new int[stopR - startR + 1];
-        int[] left = new int[stopL - startL + 1];
+        int[] right = new int[stopR - startR];
+        int[] left = new int[stopL - startL];
 
         // Copy the elements to the additional arrays
-        for(int i = 0, k = startR; i < (right.length - 1); ++i, ++k) {
-            right[i] = array[k];
+        for(int i = 0, k = startR; i < (right.length); ) {
+            right[i++] = array[k++];
         }
-        for(int i = 0, k = startL; i < (left.length - 1); ++i, ++k) {
-            left[i] = array[k];
+        for(int i = 0, k = startL; i < (left.length); ) {
+            left[i++] = array[k++];
         }
 
-        // Adding sentinel values
-        right[right.length-1] = Integer.MAX_VALUE;
-        left[left.length-1] = Integer.MAX_VALUE;
+        int leftArrLength = left.length;
+        int rightArrLength = right.length;
 
-        // Merging the two sorted arrays into the initial one
-        for(int k = startL, m = 0, n = 0; k < stopR; ++k) {
-            if(left[m] <= right[n]) {
-                array[k] = left[m];
-                m++;
+        int i=0,j=0,k=startL;
+
+        while(i < leftArrLength && j<rightArrLength){
+            if(left[i]< right[j]){
+                array[k++] = left[i++];
             }
             else {
-                array[k] = right[n];
-                n++;
+                array[k++] = right[j++];
             }
         }
+
+        while(i<leftArrLength){
+            array[k++] = left[i++];
+        }
+
+        while(j<rightArrLength){
+            array[k++] = right[j++];
+        }
+
+        System.out.println("The array sorted until now is : " + Arrays.stream(array).boxed().collect(Collectors.toList()));
+
     }
 
     public static void main(String[] args) {
         // Beacuse of the chosen Sentinel the array
         // should contain values smaller than Integer.MAX_VALUE .
         int[] array = new int[] {12, 11, 13, 5, 6, 7, 12, 11, 13, 5, 6, 7, 12, 11, 13, 5, 6, 7};
+//        int[] array = new int[] {6,5,4,3,2,1,8,7};
         mergeSort(array);
         printArray(array);
     }

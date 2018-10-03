@@ -9,7 +9,7 @@
         <module name="spring4-restful-example" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="8">
+    <bytecodeTargetLevel>
       <module name="spring4-restful-example" target="8" />
     </bytecodeTargetLevel>
   </component>

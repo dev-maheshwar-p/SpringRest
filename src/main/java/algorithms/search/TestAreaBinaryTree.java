@@ -1,18 +1,18 @@
-package algorithms.binarytree;/* Iterative Java program for merge sort */
+package algorithms.search;/* Iterative Java program for merge sort */
 
 import org.apache.commons.lang3.math.NumberUtils;
 
 import java.math.BigInteger;
 
-public class BinaryTreeExample1<T> {
+public class TestAreaBinaryTree<T> {
 
     Node root;
 
-    BinaryTreeExample1(){
+    TestAreaBinaryTree(){
         root = null;
     }
 
-    BinaryTreeExample1(T data){
+    TestAreaBinaryTree(T data){
         root = new Node(data);
     }
 
@@ -30,8 +30,8 @@ public class BinaryTreeExample1<T> {
 
     /* Driver program to test above functions */
     public static void main(String[] args) {
-        BinaryTreeExample1<String> tabt = new BinaryTreeExample1();
-        BinaryTreeExample1.Node root = tabt.new Node("100");
+        TestAreaBinaryTree<String> tabt = new TestAreaBinaryTree();
+        TestAreaBinaryTree.Node root = tabt.new Node("100");
         tabt.root = root;
 
         tabt.insert(tabt.root, "200");
@@ -44,12 +44,7 @@ public class BinaryTreeExample1<T> {
         tabt.insert(tabt.root, "210");
 
 
-        printInOrderTraversal(tabt.root);
-
-        tabt.delete(tabt.root, "50");
-
-        printInOrderTraversal(tabt.root);
-
+//        printInOrderTraversal(tabt.root);
 
 //        System.out.println(root.data);
 //        System.out.println(root.left.data);
@@ -74,7 +69,7 @@ public class BinaryTreeExample1<T> {
 
     }
 
-    private static void printInOrderTraversal(BinaryTreeExample1.Node root) {
+    private static void printInOrderTraversal(TestAreaBinaryTree.Node root) {
 
         if(root==null) return;
 
@@ -94,7 +89,7 @@ public class BinaryTreeExample1<T> {
         return current;
     }
 
-    private static void printPreOrderTraversal(BinaryTreeExample1.Node root) {
+    private static void printPreOrderTraversal(TestAreaBinaryTree.Node root) {
 
         if(root==null) return;
 
@@ -104,7 +99,7 @@ public class BinaryTreeExample1<T> {
     }
 
 
-    private static void printPostOrderTraversal(BinaryTreeExample1.Node root) {
+    private static void printPostOrderTraversal(TestAreaBinaryTree.Node root) {
 
         if(root==null) return;
 
@@ -115,36 +110,29 @@ public class BinaryTreeExample1<T> {
 
     private Node delete(Node root, T data) {
 
-        Object[] resultsArr = findNode(root, data);
+        Node currentNode = root, previousNode = null;
 
-        Node currentNode = (Node)resultsArr[2], previousNode = (Node) resultsArr[1];
-        boolean isLeftDataNode = (boolean) resultsArr[0];
+        if (root == null) return root;
 
-//        Node currentNode = root, previousNode = null;
-//
-//        if (root == null) return root;
-//
-//
-//        boolean isLeftDataNode = false;
-//        boolean isLessThan = isLessThan(currentNode.data.toString(), data.toString());
-//
-//        previousNode = currentNode;
-//
-//        if (isLessThan) {
-//            isLeftDataNode = true;
-//            currentNode.left = delete(currentNode.left, data);
-//        } else if (!isLessThan && !currentNode.data.toString().equalsIgnoreCase(data.toString())){
-//            isLeftDataNode = false;
-//            currentNode.right = delete(currentNode.right, data);
-//        }
-//        else if(!isLessThan && currentNode.data.toString().equalsIgnoreCase(data.toString())){
+
+        boolean isLeftDataNode = false;
+        boolean isLessThan = isLessThan(currentNode.data.toString(), data.toString());
+
+        previousNode = currentNode;
+
+        if (isLessThan) {
+            isLeftDataNode = true;
+            currentNode.left = delete(currentNode.left, data);
+        } else if (!isLessThan && !currentNode.data.toString().equalsIgnoreCase(data.toString())){
+            isLeftDataNode = false;
+            currentNode.right = delete(currentNode.right, data);
+        }
+        else if(!isLessThan && currentNode.data.toString().equalsIgnoreCase(data.toString())){
 
             /*
                 Case 1 : Where Node to be deleted has no child sub tree [Leaf Node]
              */
             if(currentNode.left == null && currentNode.right == null){
-                previousNode.left = null;
-                previousNode.right = null;
                 currentNode = null;
             }
             /*
@@ -175,40 +163,9 @@ public class BinaryTreeExample1<T> {
                     currentNode = null;
                 }
             }
-//        }
+        }
 
         return currentNode;
-    }
-
-    private Object[] findNode(Node root, T data) {
-
-        Node currentNode = root, previousNode=null;
-
-        boolean isLeft = true;
-
-        while(currentNode!=null){
-
-            if(isLessThan(data.toString(), currentNode.data.toString())){
-                previousNode = currentNode;
-                currentNode = currentNode.left;
-                isLeft = true;
-            } else if(!(isLessThan(data.toString(), currentNode.data.toString()))
-                && !(data.toString().equalsIgnoreCase(currentNode.data.toString()))){
-                previousNode = currentNode;
-                currentNode = currentNode.right;
-                isLeft = false;
-            }else if(!(isLessThan(data.toString(), currentNode.data.toString()))
-                    && (data.toString().equalsIgnoreCase(currentNode.data.toString()))){
-                break;
-            }
-        }
-        Object[] resultArr = new Object[3];
-        resultArr[0] = isLeft;
-        resultArr[1] = previousNode;
-        resultArr[2] = currentNode;
-
-
-        return resultArr;
     }
 
     private Node getInOrderSuccessor(Node root, Node dataNode) {
@@ -264,7 +221,7 @@ public class BinaryTreeExample1<T> {
 
         }
 
-        Node node = new BinaryTreeExample1.Node(newData);
+        Node node = new TestAreaBinaryTree.Node(newData);
 
         if(this.root == null){
             root = node;

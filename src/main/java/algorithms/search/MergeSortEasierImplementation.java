@@ -4,7 +4,9 @@ import java.util.Arrays;
 
 public class MergeSortEasierImplementation {
     public static void main(String args[]){
-        int[] iArr = {1,5,4,6,9,3};
+//        int[] iArr = {1,5,4,6,9,3};
+
+        int[] iArr = {5,2,4,1,3,6};
 
         mergeSort(iArr);
 
@@ -36,6 +38,8 @@ public class MergeSortEasierImplementation {
         while(j<rightArrLength){
             iArr[k++] = rightArr[j++];
         }
+
+        System.out.println();
     }
 
     private static void mergeSort(int[] iArr) {
@@ -43,18 +47,17 @@ public class MergeSortEasierImplementation {
         if(iArr.length<2) return;
 
         int left = 0;
-        int right = iArr.length -1;
-        int mid = ((left + right)+1)/2;
+        int right = iArr.length;
+        int mid = ((left + right))/2;
 
         int[] leftArr = new int[mid];
-        int[] rightArr = new int[right - mid + 1];
+        int[] rightArr = new int[right - mid];
 
         for (int i=0; i <mid; i++){
             leftArr[i] = iArr[i];
         }
 
-
-        for (int i=mid; i <=right; i++){
+        for (int i=mid; i <right; i++){
             rightArr[i-mid] = iArr[i];
         }
 
