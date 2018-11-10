@@ -43,8 +43,7 @@ public class TestArea {
 
                 if((nextWord.isEmpty() || nextWord == null)
                         && followup.empty() && chain.size()<iArr.length){
-
-                    System.out.println("The given set of words do not form a chain : " + chain);
+                    System.out.println("These given set form a chain, but do not include all the words : " + chain);
                 }
 
                 if(!followup.contains(nextWord)){

@@ -10,17 +10,22 @@ public class KthSmallestElementWithoutInOrder {
         }
 
         public KthSmallestElementWithoutInOrder() {
-            addNode(rootNode, 40);
-            addNode(rootNode, 20);
-            addNode(rootNode, 60);
+
             addNode(rootNode, 10);
-            addNode(rootNode, 30);
+            addNode(rootNode, 60);
             addNode(rootNode, 50);
+            addNode(rootNode, 40);
+            addNode(rootNode, 30);
+            addNode(rootNode, 20);
+            addNode(rootNode, 80);
             addNode(rootNode, 70);
+            addNode(rootNode, 85);
+            addNode(rootNode, 65);
+            addNode(rootNode, 75);
 
-            printTreeInOrder(rootNode);
+            //printTreeInOrder(rootNode);
 
-            int kthSmallestElement = findKthSmallestItem(rootNode, 2);
+            int kthSmallestElement = findKthSmallestItem(rootNode, 8);
 
             if(kthSmallestElement!=-1){
                 System.out.println("Kth smallest node is :"+kthSmallestElement);
@@ -39,7 +44,7 @@ public class KthSmallestElementWithoutInOrder {
             if(childCount+1==k){ // +1 for rootNode itself
                 return rootNode.getData();
 
-            }else if(childCount+1>=k){
+            }else if(childCount+1>k){
                 return findKthSmallestItem(rootNode.getLeft(), k);
             }else{
                 return findKthSmallestItem(rootNode.getRight(), k - (childCount+1));
@@ -52,7 +57,7 @@ public class KthSmallestElementWithoutInOrder {
             }
             int left = getNodeCount(node.getLeft());
             int right = getNodeCount(node.getRight());
-            System.out.println(1 + left + right);
+            System.out.println("The node is " + node.getData() + " : " +  (1 + left + right));
 
             return 1 + left + right;
         }

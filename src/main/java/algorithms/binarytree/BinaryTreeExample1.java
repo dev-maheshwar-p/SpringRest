@@ -3,10 +3,17 @@ package algorithms.binarytree;/* Iterative Java program for merge sort */
 import org.apache.commons.lang3.math.NumberUtils;
 
 import java.math.BigInteger;
+import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.Stack;
 
 public class BinaryTreeExample1<T> {
 
     Node root;
+    static Queue<BinaryTreeExample1.Node> queue = new PriorityQueue<>();
+
+    static Stack<BinaryTreeExample1.Node> stack = new Stack<>();
+
 
     BinaryTreeExample1(){
         root = null;
@@ -16,7 +23,7 @@ public class BinaryTreeExample1<T> {
         root = new Node(data);
     }
 
-    class Node{
+    class Node implements  Comparable{
 
         T data;
         Node left, right;
@@ -24,6 +31,11 @@ public class BinaryTreeExample1<T> {
         public Node(T data) {
             this.data = data;
             this.left = this.right = null;
+        }
+
+        @Override
+        public int compareTo(Object o) {
+            return 1;
         }
     }
 
@@ -44,11 +56,17 @@ public class BinaryTreeExample1<T> {
         tabt.insert(tabt.root, "210");
 
 
-        printInOrderTraversal(tabt.root);
+        printInOrderTraversalWithStack(tabt.root);
 
-        tabt.delete(tabt.root, "50");
+        System.out.println("********************");
 
         printInOrderTraversal(tabt.root);
+//
+//        tabt.delete(tabt.root, "50");
+//
+//        printInOrderTraversal(tabt.root);
+
+//        printLevelOrderTraversal(tabt.root);
 
 
 //        System.out.println(root.data);
@@ -71,6 +89,43 @@ public class BinaryTreeExample1<T> {
 //        System.out.println(tabt.getInOrderSuccessor(tabt.root, tabt.root.right.right).data);
 
         System.out.println();
+
+    }
+
+    private static void printInOrderTraversalWithStack(BinaryTreeExample1.Node root) {
+
+        BinaryTreeExample1.Node currentNode = root;
+
+        while(!(stack.size()==0) || currentNode !=null){
+
+            while(currentNode!=null){
+                stack.push(currentNode);
+                currentNode=currentNode.left;
+            }
+
+            currentNode = stack.pop();
+            System.out.println(currentNode.data);
+
+            currentNode = currentNode.right;
+        }
+
+    }
+
+    private static void printLevelOrderTraversal(BinaryTreeExample1.Node root){
+
+        queue.add(root);
+
+
+        while(!queue.isEmpty()){
+            BinaryTreeExample1.Node cn = queue.poll();
+            System.out.println(cn.data);
+
+            if(cn.left!=null){
+                queue.add(cn.left);
+            }if(cn.right!=null){
+                queue.add(cn.right);
+            }
+        }
 
     }
 
