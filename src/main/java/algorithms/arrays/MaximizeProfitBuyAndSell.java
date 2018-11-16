@@ -30,14 +30,68 @@ Explanation: In this case, no transaction is done, i.e. max profit = 0.
 public class MaximizeProfitBuyAndSell {
     public static void main(String[] args) {
          MaximizeProfitBuyAndSell mpbs = new MaximizeProfitBuyAndSell();
-         int[] iArr = new int[]{7,1,5,7,6,4};
+         int[] iArr = new int[]{7,4,5,8,11,4,5};
 
         System.out.println(mpbs.maxProfit(iArr));
+        System.out.println(mpbs.calculateMaxProfit(iArr));
+        System.out.println(mpbs.maxProfitPointerSolution(iArr));
     }
+
+
+    /*
+        This is my code.
+     */
+    public int calculateMaxProfit(int[] prices){
+
+        int totalProfit = 0;
+
+        for (int i = 0; i < prices.length-1; i++) {
+            if(prices[i+1]>prices[i]){
+                totalProfit += prices[i+1] - prices[i];
+            }
+        }
+
+        return totalProfit;
+    }
+
+
+    /*
+
+    for i = 0 to prices.length -1
+    1. if prices[i] > prices[i+1] set minPointer = i+1.
+    2. if i > minPointer then maxP += prices[i] - prices[minPointer]
+     */
+
+    public int maxProfitPointerSolution(int[] prices) {
+
+        int currentMinPointer = 0;
+        int maxP = 0;
+        boolean pointerChangedFlag = true;
+
+        for(int i=0;i<prices.length-1;i++){
+
+            if(prices[i]>prices[i+1]){
+                pointerChangedFlag = true;
+                currentMinPointer = i+1;
+            }else{
+
+                maxP += prices[i+1] - prices[currentMinPointer];
+
+                if(pointerChangedFlag == false){
+                    maxP -= prices[i]-prices[currentMinPointer];
+                }
+                pointerChangedFlag = false;
+            }
+        }
+
+        return maxP;
+    }
+
 
     public int maxProfit(int[] prices) {
         if(prices == null || prices.length == 0)
             return 0;
+
         int min = prices[0];
         int maxP = 0;
         int maxDiff = 0;
