@@ -5,8 +5,7 @@
    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
     <!-- Definition for textEditor bean -->
-    <bean id = "textEditor" class = "Spring.TextEditor">
-        <property name = "spellChecker" ref = "spellChecker" />
+    <bean id = "textEditor" class = "Spring.TextEditor" autowire = "byName">
         <property name = "name" value = "Generic Text Editor" />
     </bean>
 
